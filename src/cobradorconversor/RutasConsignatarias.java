@@ -171,9 +171,12 @@ public class RutasConsignatarias {
                                 String sProducto = joRazonSocial.getString("PRODUCTO");
                                 razonsocialconsignatarias.SetProducto(sProducto);
 
+                                razonsocialconsignatarias.SetVisitado(joRazonSocial.getInt("VISITADO"));
+
                                 razonsocialconsignatarias.SetVectorFacturas(vFacturas);
 
-                                vRazonesSociales.add(razonsocialconsignatarias);
+                                //vRazonesSociales.add(razonsocialconsignatarias);
+                                vRazonesSociales.addElement(razonsocialconsignatarias);
                             }
                         }
 
@@ -227,6 +230,7 @@ public class RutasConsignatarias {
                     joRazonSocial.put("CODIGO", razonsocialconsignatarias.GetCodigo());
                     joRazonSocial.put("AGENCIA", razonsocialconsignatarias.GetAgencia());
                     joRazonSocial.put("PRODUCTO", razonsocialconsignatarias.GetProducto());
+                    joRazonSocial.put("VISITADO", razonsocialconsignatarias.GetVisitado());
 
                     JSONArray jaFacturas = new JSONArray();
                     for (int j = 0; j < razonsocialconsignatarias.GetVectorFacturas().size(); j++) {

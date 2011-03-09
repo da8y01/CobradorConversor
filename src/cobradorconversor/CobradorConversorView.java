@@ -386,7 +386,7 @@ public class CobradorConversorView extends FrameView {
 
                 Rutas RUTAS = new Rutas(sFileFull);
 
-                String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FECHAARC"+System.getProperty("line.separator");
+                String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO"+System.getProperty("line.separator");
                 Enumeration enumRutas = RUTAS.GetVectorRutas().elements();
                 while (enumRutas.hasMoreElements()) {
                     Ruta ruta = (Ruta) enumRutas.nextElement();
@@ -487,7 +487,7 @@ public class CobradorConversorView extends FrameView {
 
                 RutasConsignatarias RUTAS = new RutasConsignatarias(sFileFull);
 
-                String sCSVFull = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;FEPAGO;NUMEROF"+System.getProperty("line.separator");
+                String sCSVFull = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;VALORCOM;FEPAGO;NUMEROF"+System.getProperty("line.separator");
                 Enumeration enumRutas = RUTAS.GetVectorRutas().elements();
                 while (enumRutas.hasMoreElements()) {
                     RutaConsignatarias ruta = (RutaConsignatarias) enumRutas.nextElement();
@@ -501,7 +501,7 @@ public class CobradorConversorView extends FrameView {
                             while (enumFechas.hasMoreElements()) {
                                 FechaConsignatarias fecha = (FechaConsignatarias) enumFechas.nextElement();
 
-                                sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + razonsocial.GetZona() + ";" + razonsocial.GetNombreRuta() + ";" + razonsocial.GetProducto() + ";" + razonsocial.GetConsignataria() + ";" + razonsocial.GetCodigo() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetValorUnitario() + ";" + factura.GetFechaPago() + ";" + factura.GetNoFactura() + System.getProperty("line.separator");
+                                sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + razonsocial.GetZona() + ";" + razonsocial.GetNombreRuta() + ";" + razonsocial.GetProducto() + ";" + razonsocial.GetConsignataria() + ";" + razonsocial.GetCodigo() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetValorUnitario() + ";" + factura.GetCompendio() + ";" + factura.GetFechaPago() + ";" + factura.GetNoFactura() + System.getProperty("line.separator");
                             }
                         }
                     }
@@ -774,7 +774,7 @@ public class CobradorConversorView extends FrameView {
                 Date today = Calendar.getInstance().getTime();
 
                 // (2) create our "formatter" (our custom format)
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
                 // (3) create a new String in the format we want
                 String folderName = formatter.format(today);
@@ -784,7 +784,9 @@ public class CobradorConversorView extends FrameView {
 
                 //ruta.SetFecha((new Date()).toString());
                 ruta.SetFecha(folderName);
+
                 ruta.SetVectorExpendios(vExpendios);
+
                 vRutas.add(ruta);
             }
 
@@ -1034,6 +1036,8 @@ public class CobradorConversorView extends FrameView {
                     razonsocialconsignatarias.SetCodigo(sRutaCodigoCli);
                     razonsocialconsignatarias.SetProducto(sRutaNomPu);
                     razonsocialconsignatarias.SetAgencia("");
+
+                    razonsocialconsignatarias.SetVisitado(0);
 
                     razonsocialconsignatarias.SetVectorFacturas(vFacturas);
                     

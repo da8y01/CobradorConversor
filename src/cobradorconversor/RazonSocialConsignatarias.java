@@ -19,6 +19,7 @@ public class RazonSocialConsignatarias {
     private String Codigo;
     private String Agencia;
     private String Producto;
+    private int Visitado;
     private Vector VectorFacturas;
     private String Message;
 
@@ -79,6 +80,15 @@ public class RazonSocialConsignatarias {
 
     public void SetProducto(String producto) {
         this.Producto = producto;
+    }
+
+
+    public int GetVisitado() {
+        return this.Visitado;
+    }
+
+    public void SetVisitado(int visitado) {
+        this.Visitado = visitado;
     }
 
 
